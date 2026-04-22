@@ -58,6 +58,8 @@ aws ec2 create-vpc --cidr-block 10.0.0.0/16
 - Launch a basic instance (Ubuntu recommended)
 - Connect using SSH
 
+![preview](./EC2-server%20Launch.png)
+
 ------
 
 ### Step 2: Update the Server
@@ -92,6 +94,8 @@ sudo ./aws/install
 
 👉 Installs AWS CLI on your EC2 instance.
 
+![preview](./Installing%20AWS-CLI%20in%20linux%20OS.png)
+
 ------
 
 # 🔐 Part 2: IAM Role Setup
@@ -105,6 +109,8 @@ sudo ./aws/install
 
 👉 IAM Role allows EC2 to access AWS services securely without credentials.
 
+![preview](./Creation%20of%20role.png)
+
 ------
 
 ### Step 2: Attach Role to EC2
@@ -112,6 +118,8 @@ sudo ./aws/install
 - Go to EC2 → Instance
 - Actions → Security → Modify IAM Role
 - Attach created role
+
+![preview](./Modifying%20role.png)
 
 ------
 
@@ -122,6 +130,8 @@ aws s3 ls
 ```
 
 👉 Shows all S3 buckets → confirms CLI is working.
+
+![preview](./AWS-CLI-Connected.png)
 
 ------
 
@@ -135,6 +145,10 @@ aws s3 mb s3://cli-satwik-bucket-2
 
 👉 `mb` = Make Bucket
 
+![preview](./Creating%20s3%20bucket%20by%20using%20cli%20commands.png)
+
+![preview](./Bucket%20was%20created%20by%20CLI%20command.png)
+
 ------
 
 ### 🔹 Upload File
@@ -144,6 +158,10 @@ aws s3 cp awscliv2.zip s3://cli-satwik-bucket-2
 ```
 
 👉 `cp` = Copy file to S3
+
+![preview](./Uploading%20zip%20file%20or%20anything%20by%20CLI%20Command.png)
+
+![preview](./Uploaded%20file%20in%20s3%20bucket.png)
 
 ------
 
@@ -157,6 +175,11 @@ aws ec2 create-vpc --cidr-block 10.0.0.0/16
 
 👉 CIDR defines IP range for VPC.
 
+![preview](./VPC-Creation.png)
+
+![preview](./VPC-Created%20seen%20in%20aws%20cli.png)
+
+
 ------
 
 ## 🔹 Step 2: Tag VPC
@@ -169,6 +192,9 @@ aws ec2 create-tags \
 
 👉 Adds name to VPC.
 
+![preview](./Tag%20changed%20in%20VPC%20by%20CLI%20Command.png)
+
+
 ------
 
 ## 🔹 Step 3: View VPCs
@@ -176,6 +202,9 @@ aws ec2 create-tags \
 ```
 aws ec2 describe-vpcs
 ```
+
+![preview](./Describing%20VPC.png)
+
 
 ------
 
@@ -193,6 +222,11 @@ aws ec2 create-subnet \
 --cidr-block 10.0.2.0/24 \
 --availability-zone us-east-1b
 ```
+
+![preview](./Subnets%20Created%20by%20using%20CLI%20commads.png)
+
+![preview](./Associated%20Private%20Subnets.png)
+
 
 ------
 
@@ -212,6 +246,7 @@ aws ec2 create-subnet \
 👉 Public = internet access
  👉 Private = no direct internet access
 
+
 ------
 
 # 🌐 Part 7: Internet Gateway (IGW)
@@ -221,6 +256,8 @@ aws ec2 create-subnet \
 ```
 aws ec2 create-internet-gateway
 ```
+
+![preview](./Creating%20Internetgateway.png)
 
 ------
 
@@ -232,6 +269,9 @@ aws ec2 attach-internet-gateway \
 --vpc-id vpc-xxxx
 ```
 
+![preview](./Attaching%20IGW%20to%20VPC.png)
+
+
 ------
 
 # 🛣️ Part 8: Route Tables
@@ -241,6 +281,8 @@ aws ec2 attach-internet-gateway \
 ```
 aws ec2 create-route-table --vpc-id vpc-xxxx
 ```
+
+![preview](./Creating%20Route%20Tables.png)
 
 ------
 
@@ -253,6 +295,9 @@ aws ec2 create-route \
 --gateway-id igw-xxxx
 ```
 
+![preview](./Adding%20Internet%20to%20Route%20Table.png)
+
+
 ------
 
 ### Associate with Public Subnets
@@ -262,6 +307,8 @@ aws ec2 associate-route-table \
 --subnet-id subnet-xxxx \
 --route-table-id rtb-xxxx
 ```
+
+![preview](./Associating%20Route%20tables%20with%20subnets%20(Public).png)
 
 ------
 
@@ -273,6 +320,9 @@ aws ec2 create-route-table --vpc-id vpc-xxxx
 
 👉 No internet route added.
 
+![preview](./Creating%20Private%20Route%20Table.png)
+
+
 ------
 
 # 🔒 Part 9: Network ACL (NACL)
@@ -282,6 +332,9 @@ aws ec2 create-route-table --vpc-id vpc-xxxx
 ```
 aws ec2 create-network-acl --vpc-id vpc-xxxx
 ```
+![preview](./Create%20Network%20ACL%20(NACL).png)
+
+![preview](./NACL%20Created%20in%20AWS-CLI.png)
 
 ------
 
@@ -324,6 +377,10 @@ aws ec2 create-security-group \
 --description "My Security Group" \
 --vpc-id vpc-xxxx
 ```
+![preview](./Creating%20Security%20Group.png)
+
+![preview](./Security%20Group%20Creation%20seen%20in%20AWS%20-%20CLI.png)
+
 
 ------
 
@@ -336,6 +393,8 @@ aws ec2 authorize-security-group-ingress \
 --port 80 \
 --cidr 0.0.0.0/0
 ```
+![preview](./Add%20inbound%20rule%20(HTTP).png)
+
 
 ------
 
@@ -348,6 +407,8 @@ aws ec2 authorize-security-group-ingress \
 --port 22 \
 --cidr 0.0.0.0/0
 ```
+![preview](./Add%20SSH%20access.png)
+
 
 ------
 
